@@ -29,4 +29,8 @@ public class MockServer {
                         .withHeader(CONTENT_TYPE, "application/json")
                         .withBody(response));
     }
+
+    public void getJson(String path, String response) {
+        getJson(path, UnaryOperator.identity(), response);
+    }
 }
