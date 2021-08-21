@@ -14,12 +14,10 @@ import java.util.concurrent.TimeUnit;
 
 public class ServerSteps {
 
+    private static Map<String, List<Map<String, String>>> allProducts = new HashMap<>();
     @Autowired
     MockServer mockServer;
-
     private ObjectMapper objectMapper = new ObjectMapper();
-
-    private Map<String, List<Map<String, String>>> allProducts = new HashMap<>();
 
     @SneakyThrows
     @假如("存在商品类别")

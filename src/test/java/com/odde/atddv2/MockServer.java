@@ -24,6 +24,7 @@ public class MockServer {
     }
 
     public void getJson(String path, UnaryOperator<HttpRequest> params, String response) {
+        mockServerClient.clear(params.apply(request().withMethod("GET").withPath(path)));
         mockServerClient.when(params.apply(request().withMethod("GET").withPath(path)), Times.unlimited())
                 .respond(response().withStatusCode(200)
                         .withHeader(CONTENT_TYPE, "application/json")
