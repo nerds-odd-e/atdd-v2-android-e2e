@@ -36,6 +36,8 @@ public class ServerSteps {
     @假如("存在{string}电器")
     public void 存在电器(String category, DataTable dataTable) {
         allProducts.put(category, dataTable.asMaps());
-        mockServer.getJson("/products", objectMapper.writeValueAsString(allProducts));
+        mockServer.getJson("/products",
+                request -> request.withQueryStringParameter("category", "0"),
+                objectMapper.writeValueAsString(allProducts));
     }
 }
