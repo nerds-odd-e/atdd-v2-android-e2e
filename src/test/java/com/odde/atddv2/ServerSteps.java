@@ -14,7 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ServerSteps {
 
-    private static Map<String, List<Map<String, String>>> allProducts = new HashMap<>();
+    private static Map<String, List<Map<String, String>>> allElectronics = new HashMap<>();
+    private static Map<String, List<Map<String, String>>> allFurniture = new HashMap<>();
     @Autowired
     MockServer mockServer;
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -35,9 +36,18 @@ public class ServerSteps {
     @SneakyThrows
     @假如("存在{string}电器")
     public void 存在电器(String category, DataTable dataTable) {
-        allProducts.put(category, dataTable.asMaps());
+        allElectronics.put(category, dataTable.asMaps());
         mockServer.getJson("/products",
                 request -> request.withQueryStringParameter("category", "0"),
-                objectMapper.writeValueAsString(allProducts));
+                objectMapper.writeValueAsString(allElectronics));
+    }
+
+    @SneakyThrows
+    @假如("存在{string}家具")
+    public void 存在家具(String category, DataTable dataTable) {
+        allFurniture.put(category, dataTable.asMaps());
+        mockServer.getJson("/products",
+                request -> request.withQueryStringParameter("category", "1"),
+                objectMapper.writeValueAsString(allFurniture));
     }
 }
