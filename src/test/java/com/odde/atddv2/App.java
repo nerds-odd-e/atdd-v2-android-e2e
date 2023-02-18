@@ -29,7 +29,8 @@ public class App {
         caps.setCapability("udid", udid);
         caps.setCapability("platformVersion", "11.0");
         caps.setCapability("platformName", "Android");
-        caps.setCapability("app", System.getProperty("user.dir") + "/../atdd-v2/android/app/build/outputs/apk/debug/app-debug.apk");
+        caps.setCapability("app", "/home/androiduser/app-debug.apk");
+        caps.setCapability("remoteAdbHost", "host.docker.internal");
         driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         driver.launchApp();
     }
