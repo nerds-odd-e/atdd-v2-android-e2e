@@ -19,7 +19,7 @@ public class App {
 
     private AndroidDriver<AndroidElement> driver;
 
-    @Value("${appium.udid:}")
+    @Value("${appium.udid:emulator-5558}")
     private String udid;
 
     @SneakyThrows
@@ -29,8 +29,7 @@ public class App {
         caps.setCapability("udid", udid);
         caps.setCapability("platformVersion", "11.0");
         caps.setCapability("platformName", "Android");
-        caps.setCapability("app", "/home/androiduser/app-debug.apk");
-        caps.setCapability("remoteAdbHost", "host.docker.internal");
+        caps.setCapability("app", "/tmp/app.apk");
         driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         driver.launchApp();
     }
