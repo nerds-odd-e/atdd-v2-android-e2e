@@ -13,4 +13,8 @@ public class PhoneOrderPage {
     public void shouldDisplay() {
         app.shouldHaveText("Order");
     }
+
+    public void showOrders() {
+        app.clickByText("Order");
+    }
 }

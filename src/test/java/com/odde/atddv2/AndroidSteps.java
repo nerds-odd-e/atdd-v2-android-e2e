@@ -36,7 +36,7 @@ public class AndroidSteps {
 
     @当("查询订单时")
     public void 查询订单时() {
-        phoneOrderPage.shouldDisplay();
+        phoneOrderPage.showOrders();
     }
 
     @那么("显示如下订单")

@@ -29,6 +29,7 @@ public class ApplicationSteps {
     @Before(order = 1)
     public void clearDB() {
         userRepo.deleteAll();
+        orderRepo.deleteAll();
     }
 
     @Autowired
