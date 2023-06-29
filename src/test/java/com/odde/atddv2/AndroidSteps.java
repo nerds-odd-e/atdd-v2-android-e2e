@@ -14,6 +14,9 @@ public class AndroidSteps {
     @Autowired
     PhoneOrderPage phoneOrderPage;
 
+    @Autowired
+    App app;
+
     @当("以用户名为{string}和密码为{string}手机登录时")
     public void 以用户名为和密码为手机登录时(String username, String password) {
         phoneHomePage.open();
@@ -23,5 +26,10 @@ public class AndroidSteps {
     @那么("手机登录成功")
     public void 手机登录成功() {
         phoneOrderPage.shouldDisplay();
+    }
+
+    @那么("登录失败的错误信息是{string}")
+    public void 登录失败的错误信息是(String errorMessage) {
+        app.shouldHaveText(errorMessage);
     }
 }
