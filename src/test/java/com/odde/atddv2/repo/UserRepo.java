@@ -1,4 +1,4 @@
-package com.odde.atddv2;
+package com.odde.atddv2.repo;
 
 import com.odde.atddv2.entity.User;
 import org.springframework.data.repository.Repository;

@@ -2,6 +2,7 @@ package com.odde.atddv2;
 
 import com.odde.atddv2.page.android.PhoneHomePage;
 import com.odde.atddv2.page.android.PhoneOrderPage;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.zh_cn.当;
 import io.cucumber.java.zh_cn.那么;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,15 @@ public class AndroidSteps {
     @那么("登录失败的错误信息是{string}")
     public void 登录失败的错误信息是(String errorMessage) {
         app.shouldHaveText(errorMessage);
+    }
+
+    @当("查询订单时")
+    public void 查询订单时() {
+        phoneOrderPage.shouldDisplay();
+    }
+
+    @那么("显示如下订单")
+    public void 显示如下订单(DataTable table) {
+        table.asList().forEach(app::shouldHaveText);
     }
 }
