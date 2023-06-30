@@ -56,6 +56,15 @@ public class App {
         await().untilAsserted(() -> assertThat(driver.findElementsByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text))).isNotEmpty());
     }
 
+    public void shouldNotHaveText(String text) {
+        await().untilAsserted(() -> assertThat(driver.findElementsByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text))).isEmpty());
+    }
+
+    public void selectTextByHint(String hint, String text) {
+        clickByText(hint);
+        clickByText(text);
+    }
+
     private AndroidElement waitElementByEditTextHint(String hint) {
         return await().ignoreExceptions().until(() -> driver.findElementsByAndroidUIAutomator("new UiSelector().className(\"android.widget.EditText\")")
                 .stream().filter(e -> Objects.equals(e.getText(), hint))

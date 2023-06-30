@@ -43,4 +43,10 @@ public class AndroidSteps {
     public void 显示如下订单(DataTable table) {
         table.asList().forEach(app::shouldHaveText);
     }
+
+    @当("用如下数据录入订单:")
+    public void 用如下数据录入订单(DataTable table) {
+       phoneOrderPage.shouldDisplay();
+       phoneOrderPage.addOrder(table.asMaps().get(0));
+    }
 }
