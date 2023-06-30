@@ -29,8 +29,8 @@ public class App {
         caps.setCapability("udid", udid);
         caps.setCapability("platformVersion", "11.0");
         caps.setCapability("platformName", "Android");
-        caps.setCapability("app", "/tmp/app-debug.apk");
-        caps.setCapability("fullReset", true);
+        caps.setCapability("app", "/tmp/app.apk");
+//        caps.setCapability("fullReset", true);
         driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         driver.launchApp();
     }
