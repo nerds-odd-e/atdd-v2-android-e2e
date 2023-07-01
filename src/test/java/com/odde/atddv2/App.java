@@ -66,9 +66,7 @@ public class App {
     }
 
     private AndroidElement waitElementByEditTextHint(String hint) {
-        return await().ignoreExceptions().until(() -> driver.findElementsByAndroidUIAutomator("new UiSelector().className(\"android.widget.EditText\")")
-                .stream().filter(e -> Objects.equals(e.getText(), hint))
-                .findFirst().get(), Objects::nonNull);
+        return await().ignoreExceptions().until(() -> driver.findElementByAndroidUIAutomator("new UiSelector().className(\"android.widget.EditText\").text(\"" + hint + "\")"), Objects::nonNull);
     }
 
     private AndroidElement waitElementById(String id) {
