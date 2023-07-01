@@ -3,6 +3,7 @@ package com.odde.atddv2;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import lombok.SneakyThrows;
+import org.awaitility.Awaitility;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,10 @@ public class App {
 
     @Value("${appium.udid:emulator-5558}")
     private String udid;
+
+    static {
+        Awaitility.setDefaultTimeout(20, java.util.concurrent.TimeUnit.SECONDS);
+    }
 
     @SneakyThrows
     public void launch() {
