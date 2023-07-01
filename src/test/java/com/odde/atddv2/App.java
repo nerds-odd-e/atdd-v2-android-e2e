@@ -46,28 +46,32 @@ public class App {
     }
 
     public void inputTextByHint(String hint, String text) {
-        waitElementByEditTextHint(hint).sendKeys(text);
+        await().ignoreExceptions().untilAsserted(() -> waitElementByEditTextHint(hint).sendKeys(text));
     }
 
     public void clickByText(String text) {
-        waitElementByText(text).click();
+        await().ignoreExceptions().untilAsserted(() -> waitElementByText(text).click());
     }
 
     public void inputTextById(String id, String text) {
-        waitElementById(id).sendKeys(text);
+        await().ignoreExceptions().untilAsserted(() -> waitElementById(id).sendKeys(text));
     }
 
     public void shouldHaveText(String text) {
-        await().untilAsserted(() -> assertThat(driver.findElementsByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text))).isNotEmpty());
+        await().ignoreExceptions().untilAsserted(() -> assertThat(driver.findElementsByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text))).isNotEmpty());
     }
 
     public void shouldNotHaveText(String text) {
-        await().untilAsserted(() -> assertThat(driver.findElementsByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text))).isEmpty());
+        await().ignoreExceptions().untilAsserted(() -> assertThat(driver.findElementsByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text))).isEmpty());
     }
 
     public void selectTextByHint(String hint, String text) {
         clickByText(hint);
         clickByText(text);
+    }
+
+    public void closeApp() {
+        driver.closeApp();
     }
 
     private AndroidElement waitElementByEditTextHint(String hint) {
