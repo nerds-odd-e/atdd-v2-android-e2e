@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 @Component
-public class PhoneOrderPage {
+public class OrderPage {
 
     @Autowired
     App app;

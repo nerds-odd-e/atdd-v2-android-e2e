@@ -1,7 +1,7 @@
 package com.odde.atddv2;
 
 import com.odde.atddv2.page.android.HomePage;
-import com.odde.atddv2.page.android.PhoneOrderPage;
+import com.odde.atddv2.page.android.OrderPage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.zh_cn.当;
@@ -14,7 +14,7 @@ public class AndroidSteps {
     HomePage homePage;
 
     @Autowired
-    PhoneOrderPage phoneOrderPage;
+    OrderPage orderPage;
 
     @Autowired
     App app;
@@ -37,7 +37,7 @@ public class AndroidSteps {
 
     @当("查询订单时")
     public void 查询订单时() {
-        phoneOrderPage.showOrders();
+        orderPage.showOrders();
     }
 
     @那么("显示如下订单")
@@ -47,7 +47,7 @@ public class AndroidSteps {
 
     @当("用如下数据录入订单:")
     public void 用如下数据录入订单(DataTable table) {
-       phoneOrderPage.addOrder(table.asMaps().get(0));
+       orderPage.addOrder(table.asMaps().get(0));
     }
 
     @那么("{string}手机登录成功")
