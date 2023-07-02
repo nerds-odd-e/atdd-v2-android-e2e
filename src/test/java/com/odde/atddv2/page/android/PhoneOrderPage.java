@@ -12,12 +12,8 @@ public class PhoneOrderPage {
     @Autowired
     App app;
 
-    public void shouldDisplay(String userName) {
-        app.shouldHaveText("Welcome: " + userName);
-    }
-
     public void showOrders() {
-        app.clickByText("Welcome: j");
+        app.clickByText("Welcome j");
     }
 
     public void addOrder(Map<String, String> order) {

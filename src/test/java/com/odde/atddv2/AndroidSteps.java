@@ -1,6 +1,6 @@
 package com.odde.atddv2;
 
-import com.odde.atddv2.page.android.PhoneHomePage;
+import com.odde.atddv2.page.android.HomePage;
 import com.odde.atddv2.page.android.PhoneOrderPage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AndroidSteps {
 
     @Autowired
-    PhoneHomePage phoneHomePage;
+    HomePage homePage;
 
     @Autowired
     PhoneOrderPage phoneOrderPage;
@@ -26,8 +26,8 @@ public class AndroidSteps {
 
     @当("以用户名为{string}和密码为{string}手机登录时")
     public void 以用户名为和密码为手机登录时(String username, String password) {
-        phoneHomePage.open();
-        phoneHomePage.login(username, password);
+        homePage.open();
+        homePage.login(username, password);
     }
 
     @那么("登录失败的错误信息是{string}")
@@ -52,6 +52,6 @@ public class AndroidSteps {
 
     @那么("{string}手机登录成功")
     public void 手机登录成功(String userName) {
-        phoneOrderPage.shouldDisplay(userName);
+        app.shouldHaveText("Welcome " + userName);
     }
 }

@@ -27,22 +27,31 @@ public class App {
         Awaitility.setDefaultTimeout(20, java.util.concurrent.TimeUnit.SECONDS);
     }
 
+    private AndroidDriver<AndroidElement> getAndroidDriver() {
+        if (driver == null)
+            driver = createAndroidDriver();
+        return driver;
+    }
+
     @SneakyThrows
-    public void launch() {
+    private AndroidDriver<AndroidElement> createAndroidDriver() {
         DesiredCapabilities caps = DesiredCapabilities.android();
         caps.setCapability("automationName", "UiAutomator2");
         caps.setCapability("udid", udid);
         caps.setCapability("platformVersion", "11.0");
         caps.setCapability("platformName", "Android");
         caps.setCapability("app", "/tmp/app.apk");
-//        caps.setCapability("fullReset", true);
-        driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
-        driver.launchApp();
+        return new AndroidDriver<>(new URL("http://localhost:4723/wd/hub"), caps);
+    }
+
+    @SneakyThrows
+    public void launch() {
+        getAndroidDriver().launchApp();
     }
 
     @PreDestroy
     public void close() {
-        driver.quit();
+        getAndroidDriver().quit();
     }
 
     public void inputTextByHint(String hint, String text) {
@@ -58,11 +67,11 @@ public class App {
     }
 
     public void shouldHaveText(String text) {
-        await().ignoreExceptions().untilAsserted(() -> assertThat(driver.findElementsByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text))).isNotEmpty());
+        await().ignoreExceptions().untilAsserted(() -> assertThat(getAndroidDriver().findElementsByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text))).isNotEmpty());
     }
 
     public void shouldNotHaveText(String text) {
-        await().ignoreExceptions().untilAsserted(() -> assertThat(driver.findElementsByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text))).isEmpty());
+        await().ignoreExceptions().untilAsserted(() -> assertThat(getAndroidDriver().findElementsByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text))).isEmpty());
     }
 
     public void selectTextByHint(String hint, String text) {
@@ -71,18 +80,18 @@ public class App {
     }
 
     public void closeApp() {
-        driver.closeApp();
+        getAndroidDriver().closeApp();
     }
 
     private AndroidElement waitElementByEditTextHint(String hint) {
-        return await().ignoreExceptions().until(() -> driver.findElementByAndroidUIAutomator("new UiSelector().className(\"android.widget.EditText\").text(\"" + hint + "\")"), Objects::nonNull);
+        return await().ignoreExceptions().until(() -> getAndroidDriver().findElementByAndroidUIAutomator("new UiSelector().className(\"android.widget.EditText\").text(\"" + hint + "\")"), Objects::nonNull);
     }
 
     private AndroidElement waitElementById(String id) {
-        return await().ignoreExceptions().until(() -> driver.findElementById(id), Objects::nonNull);
+        return await().ignoreExceptions().until(() -> getAndroidDriver().findElementById(id), Objects::nonNull);
     }
 
     private AndroidElement waitElementByText(String text) {
-        return await().ignoreExceptions().until(() -> driver.findElementByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text)), Objects::nonNull);
+        return await().ignoreExceptions().until(() -> getAndroidDriver().findElementByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text)), Objects::nonNull);
     }
 }
