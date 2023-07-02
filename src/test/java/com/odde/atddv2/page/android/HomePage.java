@@ -16,7 +16,7 @@ public class HomePage {
 
     public void login(String username, String password) {
         app.inputTextByHint("用户名", username);
-        app.inputTextById("editTextPassword", password);
+        app.inputTextByHint("密码", password);
         app.clickByText("登录");
     }
 }

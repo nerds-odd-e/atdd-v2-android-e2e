@@ -62,10 +62,6 @@ public class App {
         await().ignoreExceptions().untilAsserted(() -> waitElementByText(text).click());
     }
 
-    public void inputTextById(String id, String text) {
-        await().ignoreExceptions().untilAsserted(() -> waitElementById(id).sendKeys(text));
-    }
-
     public void shouldHaveText(String text) {
         await().ignoreExceptions().untilAsserted(() -> assertThat(getAndroidDriver().findElementsByAndroidUIAutomator(String.format("new UiSelector().text(\"%s\")", text))).isNotEmpty());
     }
