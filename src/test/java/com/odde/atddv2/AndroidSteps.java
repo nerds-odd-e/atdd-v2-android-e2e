@@ -30,11 +30,6 @@ public class AndroidSteps {
         phoneHomePage.login(username, password);
     }
 
-    @那么("手机登录成功")
-    public void 手机登录成功() {
-        phoneOrderPage.shouldDisplay();
-    }
-
     @那么("登录失败的错误信息是{string}")
     public void 登录失败的错误信息是(String errorMessage) {
         app.shouldHaveText(errorMessage);
@@ -52,7 +47,11 @@ public class AndroidSteps {
 
     @当("用如下数据录入订单:")
     public void 用如下数据录入订单(DataTable table) {
-       phoneOrderPage.shouldDisplay();
        phoneOrderPage.addOrder(table.asMaps().get(0));
+    }
+
+    @那么("{string}手机登录成功")
+    public void 手机登录成功(String userName) {
+        phoneOrderPage.shouldDisplay(userName);
     }
 }

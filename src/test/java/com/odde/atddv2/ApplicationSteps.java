@@ -42,7 +42,7 @@ public class ApplicationSteps {
     public void uiLogin() {
         存在用户名为和密码为的用户("j", "j");
         androidSteps.以用户名为和密码为手机登录时("j", "j");
-        androidSteps.手机登录成功();
+        androidSteps.手机登录成功("j");
     }
 
     @假如("存在如下订单:")
