@@ -20,7 +20,7 @@ public class App {
 
     private AndroidDriver<AndroidElement> driver;
 
-    @Value("${appium.udid:emulator-5558}")
+    @Value("${appium.udid:emulator-5554}")
     private String udid;
 
     static {

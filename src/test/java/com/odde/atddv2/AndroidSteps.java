@@ -52,6 +52,6 @@ public class AndroidSteps {
 
     @那么("{string}手机登录成功")
     public void 手机登录成功(String userName) {
-        app.shouldHaveText("Welcome " + userName);
+        app.shouldHaveText("Welcome: " + userName);
     }
 }
