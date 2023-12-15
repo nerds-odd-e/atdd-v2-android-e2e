@@ -40,9 +40,7 @@ public class App {
         caps.setCapability("platformName", "Android");
         caps.setCapability("app", "/tmp/app.apk");
         caps.setCapability("uiautomator2ServerInstallTimeout", 120000);
-        caps.setCapability("androidCoverage", "com.odde.atddv2.myorder/com.odde.atddv2.myorder.JacocoInstrumentation");
-//        caps.setCapability("appWaitActivity", "com.odde.atddv2.myorder.InstrumentActivity");
-//        caps.setCapability("appWaitPackage", "com.odde.atddv2.myorder");
+        caps.setCapability("androidCoverage", "com.odde.atddv2.myorder/com.odde.atddv2.coverage.JacocoInstrumentation");
         caps.setCapability("androidCoverageEndIntent", "com.odde.atddv2.myorder.END_EMMA");
         caps.setCapability("noReset", true);
         return new AndroidDriver<>(new URL("http://localhost:4723/wd/hub"), caps);
