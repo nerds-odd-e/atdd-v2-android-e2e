@@ -10,10 +10,6 @@ public class HomePage {
     @Autowired
     App app;
 
-    public void open() {
-        app.launch();
-    }
-
     public void login(String username, String password) {
         app.inputTextByHint("用户名", username);
         app.inputTextByHint("密码", password);

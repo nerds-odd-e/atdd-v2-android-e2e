@@ -26,7 +26,6 @@ public class AndroidSteps {
 
     @当("以用户名为{string}和密码为{string}手机登录时")
     public void 以用户名为和密码为手机登录时(String username, String password) {
-        homePage.open();
         homePage.login(username, password);
     }
 

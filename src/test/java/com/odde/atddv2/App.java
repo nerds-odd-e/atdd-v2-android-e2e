@@ -23,7 +23,7 @@ public class App {
     private String udid;
 
     static {
-        Awaitility.setDefaultTimeout(20, java.util.concurrent.TimeUnit.SECONDS);
+        Awaitility.setDefaultTimeout(30, java.util.concurrent.TimeUnit.SECONDS);
     }
 
     private AndroidDriver<AndroidElement> getAndroidDriver() {
@@ -40,12 +40,12 @@ public class App {
         caps.setCapability("platformName", "Android");
         caps.setCapability("app", "/tmp/app.apk");
         caps.setCapability("uiautomator2ServerInstallTimeout", 120000);
+        caps.setCapability("androidCoverage", "com.odde.atddv2.myorder/com.odde.atddv2.myorder.JacocoInstrumentation");
+//        caps.setCapability("appWaitActivity", "com.odde.atddv2.myorder.InstrumentActivity");
+//        caps.setCapability("appWaitPackage", "com.odde.atddv2.myorder");
+        caps.setCapability("androidCoverageEndIntent", "com.odde.atddv2.myorder.END_EMMA");
+        caps.setCapability("noReset", true);
         return new AndroidDriver<>(new URL("http://localhost:4723/wd/hub"), caps);
-    }
-
-    @SneakyThrows
-    public void launch() {
-        getAndroidDriver().launchApp();
     }
 
     public void inputTextByHint(String hint, String text) {
@@ -71,7 +71,6 @@ public class App {
 
     public void closeApp() {
         if (driver != null) {
-            driver.closeApp();
             driver.quit();
             driver = null;
         }
