@@ -8,7 +8,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PreDestroy;
 import java.net.URL;
 import java.util.Objects;
 
@@ -38,20 +37,15 @@ public class App {
         DesiredCapabilities caps = DesiredCapabilities.android();
         caps.setCapability("automationName", "UiAutomator2");
         caps.setCapability("udid", udid);
-        caps.setCapability("platformVersion", "11.0");
         caps.setCapability("platformName", "Android");
         caps.setCapability("app", "/tmp/app.apk");
+        caps.setCapability("uiautomator2ServerInstallTimeout", 120000);
         return new AndroidDriver<>(new URL("http://localhost:4723/wd/hub"), caps);
     }
 
     @SneakyThrows
     public void launch() {
         getAndroidDriver().launchApp();
-    }
-
-    @PreDestroy
-    public void close() {
-        getAndroidDriver().quit();
     }
 
     public void inputTextByHint(String hint, String text) {
@@ -76,7 +70,11 @@ public class App {
     }
 
     public void closeApp() {
-        getAndroidDriver().closeApp();
+        if (driver != null) {
+            driver.closeApp();
+            driver.quit();
+            driver = null;
+        }
     }
 
     private AndroidElement waitElementByEditTextHint(String hint) {
