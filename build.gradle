@@ -56,8 +56,12 @@ dependencies {
     testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.4'
 }
 
+task cleanCoverageFiles(type: Exec) {
+    commandLine 'adb', 'shell', 'rm', '-r', '/data/user/0/com.odde.atddv2.myorder/files/coverageData', '||', 'true'
+}
+
 task cucumber(type: JavaExec) {
-    dependsOn assemble, testClasses
+    dependsOn assemble, testClasses, cleanCoverageFiles
     main = "io.cucumber.core.cli.Main"
     classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
     args = ['--plugin', 'pretty',
