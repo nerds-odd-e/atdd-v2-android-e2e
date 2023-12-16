@@ -8,12 +8,14 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.4.4")
         classpath "io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE"
+        classpath "gradle.plugin.com.github.viswaramamoorthy:gradle-util-plugins:0.1.0-RELEASE"
     }
 }
 
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
+apply plugin: "com.github.ManifestClasspath"
 
 repositories {
     mavenCentral()
@@ -60,6 +62,7 @@ task cucumber(type: JavaExec) {
     dependsOn assemble, testClasses
     main = "io.cucumber.core.cli.Main"
     classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+    jvmArgs "-Dfile.encoding=UTF-8"
     args = ['--plugin', 'pretty',
             '--glue', 'com.odde.atddv2',
             'src/test/resources']
